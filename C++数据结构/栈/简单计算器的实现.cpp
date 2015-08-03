@@ -5,11 +5,34 @@ using namespace std;
 
 
 char mid_e[MAXN], pos_e[MAXN];
-int v = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
+int v[26] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26 };
 
 //pos_e[]要计算的数组，int  *p_y算完后的最终结果
 //c保存正在计算的字符，x中间计算临时变量，y计算指数运算时的底数
 //j，k，z指数运算的临时变量
+
+
+void input();
+int evaluate(char[], int *);
+int mid_to_pos(char[], char[] );
+
+void main() {
+	int y;
+	input();
+	if (mid_to_pos(mid_e, pos_e)) {
+		cout << "ERROR!" << endl;
+		return;
+	};
+	evaluate(pos_e, &y);
+	cout<<"min_pos = " << y;
+
+}
+
+void input(){
+
+	cin >> mid_e;
+
+}
 
 int  evaluate(char  pos_e[], int  *p_y)
 { 
@@ -141,3 +164,4 @@ int mid_to_pos(char  mid_e[], char  pos_e[])
 	pos_e[j] = '\0';
 	return 0;
 }
+
