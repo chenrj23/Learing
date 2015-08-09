@@ -78,9 +78,9 @@ function prev() {
     }
 }
 function next() {
-    if (this.pos <= this.listSize-1) {                    //原本书中是 =  ，但这样书后·for (list.front(); list.currPos() < list.length(); list.next())·
+    if (this.pos <= this.listSize-1) {
         ++this.pos;
-    }                                                     //这样的写法在循环到最后一个数时会不断卡在那，是因为最后一个数的next()在原写法中无法增加
+    }
 }
 function currPos() {
     return this.pos;
@@ -90,6 +90,67 @@ function moveTo(position) {
 }
 function getElement() {
     return this.dataStore[this.pos];
+}
+
+
+//以上基本类
+
+
+function createArr(file) {
+    var arr = read(file).split("\n");
+    for (var i = 0; i < arr.length; ++i) {
+        arr[i] = arr[i].trim();
+    }
+    return arr;
+}
+
+function Customer(name, movie) {
+    this.name = name;
+    this.movie = movie;
+}
+
+var movieList = new List();
+var customers = new List();
+
+
+function displayList(list) {
+    for (list.front(); list.currPos() < list.length(); list.next()) {
+        if (list.getElement() instanceof Customer) {
+            print(list.getElement()["name"] + ", " + 
+                  list.getElement()["movie"]);
+        }
+        else {
+            print(list.getElement());
+        }
+    }
+}
+
+//原代码
+// function checkOut(name, movie, filmList, customerList) {
+//     if (movieList.contains(movie)) {
+//         var c = new Customer(name, movie);
+//         customerList.append(c);
+//         filmList.remove(movie);
+//     }
+//     else {
+//         print(movie + " is not available.");
+//     }
+// }
+//以下新代码
+
+var borrowedList = new List;
+
+function checkOut(name, movie, filmList, borrowedList) {
+    print("The borrowed movie List\n");
+    displayList(borrowedList)
+    if (movieList.contains(movie)) {
+        var c = new Customer(name, movie);
+        borrowedList.append(c);
+        filmList.remove(movie);
+    }
+    else {
+        print(movie + " is not available.");
+    }
 }
 
 
