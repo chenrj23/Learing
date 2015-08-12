@@ -1,4 +1,4 @@
-// 实现 advance(n) 方法，使当前节点向前移动 n 个节点
+// 实现show()方法，只显示当前节点上的数据。
 function Node(element) {
    this.element = element;
    this.next = null;
@@ -6,14 +6,17 @@ function Node(element) {
 
 function LList() {
    this.head = new Node("head");
+   this.position = this.head;
    this.find = find;
    this.insert = insert;
    this.display = display;
    this.findPrevious = findPrevious;
    this.remove = remove;
-   this.advance = advance;
+   this.show = show;
 }
-
+function show(){
+  print(this.position.element)
+}
 function remove(item) {
    var prevNode = this.findPrevious(item);
    if (!(prevNode.next == null)) {
@@ -27,6 +30,7 @@ function findPrevious(item) {
            (currNode.next.element != item)) {
        currNode = currNode.next;
     }
+    this.position = currNode
     return currNode;
 }
 
@@ -43,6 +47,7 @@ function find(item) {
    while (currNode.element != item) {
        currNode = currNode.next;
     }
+    this.position = currNode
     return currNode;
 }
 
@@ -51,29 +56,14 @@ function insert(newElement, item) {
    var current = this.find(item);
    newNode.next = current.next;
    current.next = newNode;
-}
-function advance(item, n){
-  if (n <= 0) {
-    return false
-  };
-  var preNNode = this.findPrevious(item)
-  this.remove(item)
-  for(i = 0; i <= n; i++){
-    preNNode = this.findPrevious(preNNode.element)
-  }
-  this.insert(item, preNNode.element)
+   this.position = current.next
 }
 
 //测试
 var cities = new LList();
 cities.insert("Conway", "head");
+cities.show()
 cities.insert("Russellville", "Conway");
 cities.insert("Alma", "Russellville");
-cities.insert("shanghai", "Alma");
-cities.display()
+cities.show()
 print()
-cities.advance("Alma", 1)
-cities.display()
-print()
-cities.advance("Russellville", 1)
-cities.display()

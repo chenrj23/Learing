@@ -2,13 +2,16 @@ function Node(element) {
    this.element = element;
    this.next = null;
 }
+
 function LList() {
    this.head = new Node("head");
+   this.head.next = this.head;
    this.find = find;
    this.insert = insert;
    this.display = display;
    this.findPrevious = findPrevious;
    this.remove = remove;
+   this.length = length;
 }
 
 function remove(item) {
@@ -29,10 +32,11 @@ function findPrevious(item) {
 
 function display() {
    var currNode = this.head;
-   while (!(currNode.next == null)) {
+   while (!(currNode.next == null) &&
+             !(currNode.next.element == "head")) {
        print(currNode.next.element);
        currNode = currNode.next;
-    }
+   }
 }
 
 function find(item) {
@@ -50,15 +54,37 @@ function insert(newElement, item) {
    current.next = newNode;
 }
 
+function length(){
+   var currNode = this.head;
+   var count = 0;
+   while (!(currNode.next == null) &&
+             !(currNode.next.element == "head")) {
+       count++;
+       currNode = currNode.next;
+   }
+   return count
+}
 
 
-var cities = new LList();
-var a = cities.head
-print(cities.head)
-cities.insert("Conway", "head");
-var b = cities.head
-print(cities.head)
-print(a == b)
-var c = new Node("test");
-var d = new Node("test")
-print(c == d)
+
+
+
+var people = new LList
+people.insert(1,"head")
+for(i = 2; i <= 41; i++){
+  people.insert(i,--i)
+  i++
+}
+var count = 0;
+var theNode = people.head
+while(people.length() != 2){
+  if (count != 0 && count % 3 == 0 ) {
+    people.remove(theNode.element)
+  };
+  theNode = theNode.next
+  count++;
+  if(theNode.next.element == "head"){
+    count =0
+  }
+}
+people.display()
